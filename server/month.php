@@ -1,20 +1,19 @@
 <?php
-    include("daily_data.php");
+    include("monthly_data.php");
 ?>
 
 <!DOCTYPE>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Daily weather</title>
+        <title>Monthly max temperatures</title>
         <script src="d3/d3.v3.min.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         <div id="head">
-            <h1>Daily weather</h1>
+            <h1>Monthly max temperatures</h1>
             <?php include("nav.php") ?>
-            <?php include("nav2.php") ?>
         </div>
         <script>
 
@@ -23,33 +22,25 @@
             var points = [];
 
             data.forEach(function(d){
-                     var t = d.timeStamp.split(/[- :]/);
+    					//	MySQL timestamp:
+    					//	'2038-01-19 03:14:07'
+    					//	year-month-day hour-minute-seconds
 
-                     d.timeStamp = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);//t[1]-1 ??
-
-                     points.push(d.temperature);
-                     points.push(d.humidity);
+              var t = d.timeStamp.split(/[- :]/);
+              d.timeStamp = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]); // replaces all the timestamps with D3 dates
+              points.push(d.temperature);
+              points.push(d.humidity);
             });
 
-            var currDate = new Date(d3.min(data, function(d){return Math.min(d.timeStamp);}));
-            var day = currDate.getDay()-1; //returns 0 - 6
-            var month = currDate.getMonth()+1; //returns 0 - 11
-            var year = currDate.getFullYear(); //returns 2013 here
-
             //
-            // the date which the current data corresponds to
-            //
-            d3.select("#nav2 #title p").text(day+" / "+month+" / "+year);
-
-            //
-            // necessary variables
+            // window related variables
             //
             var margin = {top: 10, right: 0, bottom: 0, left: 40},
                 width = 1024 - margin.left - margin.right,
                 height = 500 - margin.top - margin.bottom;
 
             //
-            // create scales (x for time, y for temperature and humidity)
+            // create scales (x for time, y  for temperature)
             //
             var x = d3.time.scale()
                 .domain([
@@ -74,9 +65,9 @@
             //
             var xAxis = d3.svg.axis()
                 .tickSize(6)
-                .ticks(24)
+                .ticks(31)
                 .scale(x)
-                .tickFormat(d3.time.format("%H:%M"));
+                .tickFormat(d3.time.format("%d / %m"));
 
             var yAxis = d3.svg.axis()
                 .scale(y)
@@ -98,7 +89,7 @@
             // create svg: handles object chain
             //
             var svg = d3.select("body").append("svg")
-                .attr("width", width + margin.left + margin.right + 50)
+                .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
               .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -128,7 +119,7 @@
                 .attr("d", line2(data));
 
             //
-            // tooltip for showing point values on mouse hover
+            // tooltip for showing point values
             //
             var tooltip = d3.select("body")
                 .append("div")
@@ -197,7 +188,7 @@
                     function(){return tooltip.style("visibility", "hidden"),d3.select(this).attr("r","1");});;
 
             //
-            // append the created axis
+            //append the created axis
             //
             svg.append("g")
                 .attr("class", "x axis")
@@ -211,30 +202,23 @@
                     return "rotate(-50)"
                 });
 
-            //
-            // humidity scale
-            //
             svg.append("g")
                 .attr("class", "y axis")
                 .attr("transform", "translate(-25,0)")
                 .call(yAxis);
 
-            //
-            // temperature scale
-            //
             svg.append("g")
                 .attr("class", "y1 axis")
                 .attr("transform", "translate(-70,0)")
                 .call(y1Axis);
-            //
-            // x axis label (time)
-            //
-            svg.append("text")
-                .attr("x", width +30 )
-                .attr("y", height + 10 )
-                .style("text-anchor", "middle")
-                .attr("class","text_weight")
-                .text("Date");
+
+            // svg.append("text")      // text label for the x (time) axis
+            //     .attr("x", width +30 )
+            //     .attr("y", height + 10 )
+            //     .style("text-anchor", "middle")
+            //     .attr("class","text_weight")
+            //     .text("Date");
+
 
             //
             // y0 axis label (temperature)
@@ -250,7 +234,7 @@
                 .attr("class","text_weight");
 
             //
-            // y1 axis label(humidity)
+            // y1 axis label (humidity)
             //
             svg.append("text")
                 .attr("transform", "rotate(-90)")
