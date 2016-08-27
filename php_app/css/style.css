@@ -129,26 +129,26 @@ nav ul li a:hover{
 }
 
 #leftArrow:hover{
-	background: url(images/arrow-left-hover.png) no-repeat;
+	background: url('../imgs/arrow-left-hover.png') no-repeat;
 	cursor: pointer;
 }
 
 #rightArrow:hover{
-	background: url(images/arrow-right-hover.png) no-repeat;
+	background: url('../imgs/arrow-right-hover.png') no-repeat;
 	cursor: pointer;
 }
 
 #leftArrow{
-	background: url(images/arrow-left.png) no-repeat;
-    margin-left: 50px;
+	background: url('../imgs/arrow-left.png') no-repeat;
+  margin-left: 50px;
 }
 
 #rightArrow{
-	background: url(images/arrow-right.png) no-repeat;
+	background: url('../imgs/arrow-right.png') no-repeat;
 }
 
 #nav2{
-    display: inline-block;
+  display: inline-block;
 	float:right;
 	margin-top: 32px;
 }
