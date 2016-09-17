@@ -19,7 +19,7 @@ To know how to wire the arduino with the sensor, please refer to the guide i hav
 
 [www.instructables.com/id/PART-1-Send-Arduino-data-to-the-Web-PHP-MySQL-D3js]:http://www.instructables.com/id/PART-1-Send-Arduino-data-to-the-Web-PHP-MySQL-D3js/
 
-#### Database preparation
+### 1. Database preparation
 
 First, create a database named anything you like and then run the following sql script:
 
@@ -45,7 +45,7 @@ You will need to replace the credentials in the file ***includes/connect.php*** 
 	}
 ```
 
-#### PHP Web Application
+### 2. PHP Web Application
 
 Next, copy the php app files to a server location, taking into account the following:
 
@@ -63,7 +63,7 @@ Next, copy the php app files to a server location, taking into account the follo
 
 
 
-#### Arduino Web Client
+### 3. Arduino Web Client
 
 To configure the server ther arduino connects to, in the file **Arduino_client.ino**, lines 42 and 44 will take the address of your own server. This address can either be a normal webdomain or an IP Address.
 
@@ -84,7 +84,9 @@ To configure the server ther arduino connects to, in the file **Arduino_client.i
 
 Next, you can upload the code to your Arduino and connect it to the network. This Arduino code is designed to use Dynamic IP Addresses, so that it can be used on normal home networks without IPS conflicts.
 
-#### Data Visualization with D3.js
+---
+
+### Data Visualization with D3.js
 
 This javascript library integration will render the information like in the following image.
 
