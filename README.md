@@ -20,7 +20,6 @@ These instructions will get you a copy of the project up and running on your loc
 
 The web application can run within a local area network, with the help of XAMP application stack (on linux) or WAMP (on windows), but the server needs to be configured to accept local IP's. Or, like i did, on a server located outside your home network.
 
-
 ### File placement
 
 Copy the php app files to the server root directory. Then you need to create a database and insert 
