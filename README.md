@@ -88,7 +88,7 @@ Next, you can upload the code to your Arduino and connect it to the network. Thi
 
 This javascript library integration will render the information like in the following image.
 
-![D3_data_viz_double_axis](https://www.dropbox.com/s/tbwvawkeaz3vuig/daily%204-7-14.png?dl=0)
+![D3_data_viz_double_axis](https://cloud.githubusercontent.com/assets/4175297/18608876/ee4fdffe-7cec-11e6-9d6e-60c883305128.png)
 
 
 ### Updates to this application
