@@ -89,8 +89,14 @@ To configure the server ther arduino connects to, in the file **Arduino_client.i
 
 Next, you can upload the code to your Arduino and connect it to the network. This Arduino code is designed to use Dynamic IP Addresses, so that it can be used on normal home networks without IPS conflicts.
 
+#### Data Visualization with D3.js
+
+
+
 ### Updates to this application
 
 First release is the code shared on Instructables, with the fully functional Arduino Client and a basic PHP Web App. The app only shows a table with the raw sql data.
 
 The second release is the full Application using the D3.js Javascript framework to show an awesome Data Visualization of the information gathered.
+
+
