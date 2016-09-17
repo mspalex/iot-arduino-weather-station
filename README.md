@@ -3,26 +3,21 @@
 This application connects an Arduino that reads data from sensors* (temperature and humidity in this case) to a PHP application that stores the information on a Database and displays it with a Javascript library specific for Data Visualization.
 
 
-To know how to wire the arduino with the sensor, please refer to the guide i have hosted on instructables [www.instructables.com/id/PART-1-Send-Arduino-data-to-the-Web-PHP-MySQL-D3js]
-
-[www.instructables.com/id/PART-1-Send-Arduino-data-to-the-Web-PHP-MySQL-D3js]:http://www.instructables.com/id/PART-1-Send-Arduino-data-to-the-Web-PHP-MySQL-D3js/
-
-
-
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisities
 
+- Arduino with ehternet shield or other network interface
 - Apache Web Server
 - MySQL Database Server
 
 The web application can run within a local area network, with the help of XAMP application stack (on linux) or WAMP (on windows), but the server needs to be configured to accept local IP's. Or, like i did, on a server located outside your home network.
 
-### File placement
+To know how to wire the arduino with the sensor, please refer to the guide i have hosted on instructables [www.instructables.com/id/PART-1-Send-Arduino-data-to-the-Web-PHP-MySQL-D3js]
 
-Copy the php app files to the server root directory. Then you need to create a database and insert 
+[www.instructables.com/id/PART-1-Send-Arduino-data-to-the-Web-PHP-MySQL-D3js]:http://www.instructables.com/id/PART-1-Send-Arduino-data-to-the-Web-PHP-MySQL-D3js/
 
 #### Database preparation
 
@@ -91,6 +86,9 @@ Next, you can upload the code to your Arduino and connect it to the network. Thi
 
 #### Data Visualization with D3.js
 
+This javascript library integration will render the information like in the following image.
+
+![D3_data_viz_double_axis](https://www.dropbox.com/s/tbwvawkeaz3vuig/daily%204-7-14.png?dl=0)
 
 
 ### Updates to this application
