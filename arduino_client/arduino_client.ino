@@ -37,7 +37,7 @@ void loop(){
 	h = (int) dht.readHumidity();
 	t = (int) dht.readTemperature();
 
-	data = "temp1=" + t + "&hum1=" + h;
+	data = "temp1=" + String(t) + "&hum1=" + String(h);
 
 	if (client.connect("www.*****.*************.com",80)) { // REPLACE WITH YOUR SERVER ADDRESS
 		client.println("POST /add.php HTTP/1.1"); 

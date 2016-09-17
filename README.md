@@ -1,27 +1,33 @@
-# iot-arduino-weather-station
+# IoT-arduino-weather-station
 
-Arduino Web client reading data from sensors (temperature and humidity) and sending to a PHP Web app to store and display the information
+This application connects an Arduino that reads data from sensors* (temperature and humidity in this case) to a PHP application that stores the information on a Database and displays it with a Javascript library specific for Data Visualization.
 
-### Full Guide on instructables [here]
 
-[here]:http://www.instructables.com/id/PART-1-Send-Arduino-data-to-the-Web-PHP-MySQL-D3js/
+To know how to wire the arduino with the sensor, please refer to the guide i have hosted on instructables [www.instructables.com/id/PART-1-Send-Arduino-data-to-the-Web-PHP-MySQL-D3js]
+
+[www.instructables.com/id/PART-1-Send-Arduino-data-to-the-Web-PHP-MySQL-D3js]:http://www.instructables.com/id/PART-1-Send-Arduino-data-to-the-Web-PHP-MySQL-D3js/
 
 
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisities
 
-- Apache Web Server to run the PHP code
+- Apache Web Server
 - MySQL Database Server
 
-You can either run this application within your local network, with an application stack like XAMPP (on linux) or WAMP (on windows) with your computer, or on a webserver located outside your home network (the internet!)
+The web application can run within a local area network, with the help of XAMP application stack (on linux) or WAMP (on windows), but the server needs to be configured to accept local IP's. Or, like i did, on a server located outside your home network.
+
+
+### File placement
+
+Copy the php app files to the server root directory. Then you need to create a database and insert 
 
 #### Database preparation
 
-Create a database named anything you like and then run the following sql script:
+First, create a database named anything you like and then run the following sql script:
 
 ```sql
 	CREATE TABLE tempLog (
@@ -30,10 +36,24 @@ Create a database named anything you like and then run the following sql script:
 			humidity int(11) NOT NULL
 	);
 ```
+Then create an SQL user with password and attribute previleges for the newly created database. 
+
+You will need to replace the credentials in the file ***includes/connect.php*** with the new ones.
+```php
+	function Connection(){
+
+		$server="server";
+		$user="user";
+		$pass="pass";
+		$db="XXX";
+		
+		...
+	}
+```
 
 #### PHP Web Application
 
-Next, you can either :
+Next, copy the php app files to a server location, taking into account the following:
 
 - Put the PHP code within the root of the server, and it will be accessible through:
 	- **www.yourwebsite.domain**
@@ -47,23 +67,11 @@ Next, you can either :
 	- **www.yourwebsite.domain/foldername**
 
 
-After the PHP code is in place, create an SQL user with password and attribute previleges for the newly created database. You need to replace the credentials within ***includes/connect.php*** with your own.
 
-```php
-	function Connection(){
-
-		$server="server";
-		$user="user";
-		$pass="pass";
-		$db="XXX";
-		
-		...
-	}
-```
 
 #### Arduino Web Client
 
-If you consult the **Arduino_client** code, on lines 42 and 44 you can see the comments telling you to change the addresses with asterisks to the location of your own server. This address can either be a normal webdomain or an IP Address.
+To configure the server ther arduino connects to, in the file **Arduino_client.ino**, lines 42 and 44 will take the address of your own server. This address can either be a normal webdomain or an IP Address.
 
 ```C
 	void loop(){
@@ -80,7 +88,7 @@ If you consult the **Arduino_client** code, on lines 42 and 44 you can see the c
 	}
 ```
 
-Next, you can upload the code to your Arduino and connect it to the network. This Arduino code is designed to use Dynamic IP Addresses, so that it can be used on normal home networks without incompatibilities.
+Next, you can upload the code to your Arduino and connect it to the network. This Arduino code is designed to use Dynamic IP Addresses, so that it can be used on normal home networks without IPS conflicts.
 
 ### Updates to this application
 
